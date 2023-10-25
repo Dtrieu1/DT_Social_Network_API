@@ -18,11 +18,8 @@ const studentSchema = new Schema(
       //must match valid email address?? 
       max_length: 50,
     },
-    github: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
+    //Need to reference _id values to thought model
+    //Need to reference _id values to user model 
     assignments: [assignmentSchema],
   },
   {
