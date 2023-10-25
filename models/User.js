@@ -4,14 +4,18 @@ const assignmentSchema = require('./Assignment');
 // Schema to create Student model
 const studentSchema = new Schema(
   {
-    first: {
+    username: {
       type: String,
+      unique: true,
       required: true,
+      //trimmed?? 
       max_length: 50,
     },
-    last: {
+    email: {
       type: String,
+      unique: true,
       required: true,
+      //must match valid email address?? 
       max_length: 50,
     },
     github: {
