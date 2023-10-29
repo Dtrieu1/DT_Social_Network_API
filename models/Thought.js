@@ -4,18 +4,24 @@ const { Schema, model } = require('mongoose');
 const reactionSchema = new Schema(
   {
     reactionID:{
-
+      //Mongoose's ObjectId data type and Default value is set to a new ObjectId 
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
     },
     reactionBody: {
-
+      type: String, 
+      required: true,
+      maxLength: 280,
     },
     username: {
-
+      type: String,
+      required: true,
     },
     createdAt: {
       type: Date, 
       default: Date.now,
       //use a getter method to format the timestamp on query
+      get: (date) => date.now(),
     },
   },
    { 
@@ -24,7 +30,6 @@ const reactionSchema = new Schema(
       getters: true,
   },
   id: false,
-
 })
 
 const thoughtSchema = new Schema(
@@ -39,6 +44,7 @@ const thoughtSchema = new Schema(
     type: Date, 
     default: Date.now,
     //Use a getter method to format the timestamp on query
+    get: (date) => date.now(),
    },
     //Username - User that created this thought
    username: {
@@ -49,7 +55,6 @@ const thoughtSchema = new Schema(
    reactions: [
       reactionSchema
    ]
-   
   },
   { 
     toJSON: {
@@ -57,7 +62,6 @@ const thoughtSchema = new Schema(
       getters: true,
   },
   id: false,
-
 });
 
   thoughtSchema

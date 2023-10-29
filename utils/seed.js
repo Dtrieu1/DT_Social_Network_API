@@ -1,15 +1,15 @@
 const connection = require('../config/connection');
 const { User, Thought } = require('../models');
-const { getRandomName, getRandomApplications } = require('./data');
+const { getRandomName, getRandomThoughts } = require('./data');
 
 connection.on('error', (err) => err);
 
 connection.once('open', async () => {
   console.log('connected');
   // Delete the collections if they exist
-  let applicationCheck = await connection.db.listCollections({ name: 'applications' }).toArray();
-  if (applicationCheck.length) {
-    await connection.dropCollection('applications');
+  let thoughtCheck = await connection.db.listCollections({ name: 'thoughts' }).toArray();
+  if (thoughtCheck.length) {
+    await connection.dropCollection('thoughts');
   }
   
   let userCheck = await connection.db.listCollections({ name: 'users' }).toArray();
@@ -18,7 +18,7 @@ connection.once('open', async () => {
   }
   // Create new collections
   const users = [];
-  const applications = getRandomApplications(10);
+  const thoughts = getRandomThoughts(10);
 
   for (let i = 0; i < 20; i++) {
     const fullName = getRandomName();
@@ -33,11 +33,11 @@ connection.once('open', async () => {
   }
 
   await User.collection.insertMany(users);
-  await Application.collection.insertMany(applications);
+  await Thought.collection.insertMany(thoughts);
 
-  // loop through the saved applications, for each application we need to generate a application response and insert the application responses
+  // loop through the saved thoughts, for each thought we need to generate a thought response and insert the thought responses
   console.table(users);
-  console.table(applications);
+  console.table(thoughts);
   console.info('Seeding complete! 🌱');
   process.exit(0);
 });
