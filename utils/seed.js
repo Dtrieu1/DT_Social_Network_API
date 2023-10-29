@@ -1,5 +1,5 @@
 const connection = require('../config/connection');
-const { User, Application } = require('../models');
+const { User, Thought } = require('../models');
 const { getRandomName, getRandomApplications } = require('./data');
 
 connection.on('error', (err) => err);
@@ -16,7 +16,7 @@ connection.once('open', async () => {
   if (userCheck.length) {
     await connection.dropCollection('users');
   }
-
+  // Create new collections
   const users = [];
   const applications = getRandomApplications(10);
 

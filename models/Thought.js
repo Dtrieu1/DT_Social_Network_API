@@ -1,4 +1,4 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 //reactionSchema is not a model 
 const reactionSchema = new Schema(
@@ -66,6 +66,6 @@ const thoughtSchema = new Schema(
       return this.reactions.length;
     })
 
-const Thought = model('thought', thoughtSchema);
+const Thought = model('application', thoughtSchema);
 
 module.exports = Thought;

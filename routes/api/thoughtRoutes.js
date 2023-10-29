@@ -1,29 +1,23 @@
 const router = require('express').Router();
 //all information gathered from thought controller
 const {
-  getApplications,
-  getSingleApplication,
-  createApplication,
-  updateApplication,
-  deleteApplication,
+  getThoughts,
+  getSingleThought,
+  createThought,
+  updateThought,
+  deleteThought,
   addTag,
   removeTag,
 } = require('../../controllers/thoughtController');
 
-// /api/applications
-router.route('/').get(getApplications).post(createApplication);
+// /api/thoughts
+router.route('/').get(getThoughts).post(createThought);
 
-// /api/applications/:applicationId
+// /api/thoughts/:thoughtId
 router
   .route('/:thoughtId')
-  .get(getSingleApplication)
-  .put(updateApplication)
-  .delete(deleteApplication);
-
-// /api/applications/:applicationId/tags
-router.route('/:thoughtId/tags').post(addTag);
-
-// /api/applications/:applicationId/tags/:tagId
-router.route('/:thoughtId/tags/:tagId').delete(removeTag);
+  .get(getSingleThought)
+  .put(updateThought)
+  .delete(deleteThought);
 
 module.exports = router;
