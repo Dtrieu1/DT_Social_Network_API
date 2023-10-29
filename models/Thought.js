@@ -70,6 +70,6 @@ const thoughtSchema = new Schema(
       return this.reactions.length;
     })
 
-const Thought = model('application', thoughtSchema);
+const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought;

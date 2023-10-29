@@ -14,9 +14,9 @@ const {
 router.route('/').get(getThoughts).post(createThought);
 
 // /api/thoughts/:thoughtId
-router.route('/:thoughtId').get(getSingleThought).put(updateThought).delete(deleteThought);
+router.route('thoughts/:thoughtId').get(getSingleThought).put(updateThought).delete(deleteThought);
 
 // /api/thoughts/:thoughtId/reactions/reactionId
-router.route('/:userId/reactions/:reactionId').post(addReaction).delete(removeReaction);
+router.route('thoughts/:thoughtId/reactions/:reactionId').post(addReaction).delete(removeReaction);
 
 module.exports = router;
