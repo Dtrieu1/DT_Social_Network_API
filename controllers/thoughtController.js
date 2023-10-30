@@ -9,6 +9,7 @@ module.exports = {
       res.json(thoughts);
     } catch (err) {
       res.status(500).json(err);
+      console.log(err);
     }
   },
   // Gets a single thought using the findOneAndUpdate method. We pass in the ID of the thought and then respond with it, or an error if not found
@@ -117,15 +118,15 @@ module.exports = {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { tags: { reactionId: req.params.reactionId } } },
-        { new: true }
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { runValidators: true, new: true }
       );
 
       if (!thought) {
         return res.status(404).json({ message: 'No thought with this id!' });
       }
 
-      res.json(thought);
+      res.json({message: "Reaction has now been removed!"});
     } catch (err) {
       res.status(500).json(err);
     }
