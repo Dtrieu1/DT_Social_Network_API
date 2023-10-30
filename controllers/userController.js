@@ -80,8 +80,8 @@ async addFriend (req, res) {
     const user = await User.findOneAndUpdate(
       //Finds the value and Update
       { _id: req.params.userId },
-      { $addToSet: { friends: req.body.friendId} },
-      {new: true});
+      { $addToSet: { friends: req.body.friendId } },
+      { new: true });
 
     if (!user) {
       return res.status(404).json({ message: 'No user with that ID' });
@@ -101,8 +101,8 @@ async deleteFriend (req, res) {
     const user = await User.findOneAndUpdate(
       //Finds the value and Update
       { _id: req.params.userId },
-      {$pull: {friends: req.params.friendId}},
-      {new: true});
+      { $pull: { friends: req.body.friendId } },
+      { runValidators: true, new: true });
     if (!user) {
       return res.status(404).json({ message: 'No user with that ID' });
     }
